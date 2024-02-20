@@ -11,3 +11,4 @@ export './app_cache_network_image.dart';
 export './app_text.dart';
 export './app_radio_button.dart';
 export './app_multiple_images_picker_widget.dart';
+export './app_map_picker.dart';
