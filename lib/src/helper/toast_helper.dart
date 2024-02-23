@@ -10,7 +10,7 @@ class ToastHelper {
   static Future<Object?> showCustomToast({
     required BuildContext context,
     required String title,
-    required String message,
+    String? message,
     required Color color,
     TextStyle? titleTextStyle,
     TextStyle? messageTextStyle,
@@ -69,13 +69,14 @@ class ToastHelper {
                           ),
                         ],
                       ),
-                      Divider(color: Colors.grey.shade100, thickness: 1.sp),
-                      Text(
-                        message,
-                        style: messageTextStyle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      if (message != null) Divider(color: Colors.grey.shade100, thickness: 1.sp),
+                      if (message != null)
+                        Text(
+                          message,
+                          style: messageTextStyle,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       2.heightBox,
                     ],
                   ),

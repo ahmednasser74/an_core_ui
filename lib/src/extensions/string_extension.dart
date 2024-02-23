@@ -4,6 +4,8 @@ import './date_extension.dart';
 extension StringExtension on String {
   String get toCamelCase => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 
+  String get firstChar => isNotEmpty ? trim().split(' ').map((l) => l[0]).take(2).join() : '';
+
   String get translate => this.tr();
 }
 

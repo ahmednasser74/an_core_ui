@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:an_core/an_core.dart';
 import 'package:an_core_ui/src/extensions/index.dart';
+import 'package:an_core_ui/src/helper/index.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:math' as math;
 import 'package:image/image.dart' as im;
 import 'package:image_picker/image_picker.dart';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 
 mixin FileProperties {
@@ -26,35 +26,32 @@ mixin FileProperties {
     }
   }
 
-  Future<({File file, String path})?> pickedImage({required ImageSource source}) async {
+  Future<({String path, File file})?> pickedImage({
+    required ImageSource source,
+    int? imageQuality,
+    bool convertToFile = true,
+  }) async {
     try {
-      PermissionStatus imagePermission;
-      if (source == ImageSource.camera) {
-        imagePermission = await Permission.camera.request();
-      } else {
-        imagePermission = await Permission.storage.request();
-      }
+      final isPermissionGranted = await AppPermissionService.isPickImagePermissionGranted(isForCamera: source == ImageSource.camera);
 
-      if (imagePermission.isDenied || (Platform.isAndroid && imagePermission.isPermanentlyDenied)) {
-        throw Exception('pleaseAllowCameraPermission'.translate);
-      }
+      if (!isPermissionGranted) throw Exception('pleaseAllowCameraPermission'.translate);
 
-      final pickedFile = await ImagePicker().pickImage(source: source, imageQuality: 50);
+      final pickedFile = await ImagePicker().pickImage(source: source, imageQuality: imageQuality ?? 50);
       if (pickedFile == null) return null;
 
       final path = pickedFile.path;
-      final imageAsFile = await convertImageToFile(path);
+
+      File imageAsFile = await convertImageToFile(path);
+
       return (path: path, file: imageAsFile);
     } catch (e) {
-      Fluttertoast.showToast(msg: 'pleaseAllowCameraPermission'.translate, backgroundColor: Colors.red, textColor: Colors.white);
+      ToastHelper.showToast(msg: 'pleaseAllowCameraPermission'.translate, backgroundColor: Colors.red, textColor: Colors.white);
       return null;
     }
   }
 
   Future<List<String>?> pickedMultipleImages() async {
-    final pickedFiles = await ImagePicker().pickMultiImage(
-      imageQuality: 50,
-    );
+    final pickedFiles = await ImagePicker().pickMultiImage(imageQuality: 50);
     var imagesPath = pickedFiles?.map((image) => image.path).toList();
     if (imagesPath == null) {
       return null;
