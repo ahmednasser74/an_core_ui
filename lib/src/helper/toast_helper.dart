@@ -28,60 +28,64 @@ class ToastHelper {
           controller: controller,
           child: Padding(
             padding: EdgeInsets.only(bottom: 6.h),
-            child: Material(
-              type: MaterialType.transparency,
-              child: AppContainer(
-                paddingTop: 10,
-                marginBottom: 2.h,
-                marginLeft: 1.w,
-                marginRight: 1.w,
-                color: color,
-                borderRadius: 24.0,
-                shadowBlurColor: color,
-                child: AppContainer(
-                  width: 0.9.sw,
-                  marginHorizontal: 5.w,
-                  marginVertical: 5.h,
-                  color: Colors.white,
-                  borderRadius: 24.r,
-                  shadowBlurColor: Colors.grey,
-                  shadowSpreadRadius: 0.5.sp,
-                  paddingHorizontal: 5.w,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Row(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Material(
+                  type: MaterialType.transparency,
+                  child: AppContainer(
+                    paddingTop: 4.h,
+                    paddingLeft: 1.w,
+                    paddingRight: 1.w,
+                    marginBottom: MediaQuery.of(context).padding.bottom,
+                    color: color,
+                    borderRadius: 24.0,
+                    shadowBlurColor: color,
+                    child: AppContainer(
+                      width: 0.9.sw,
+                      paddingHorizontal: 22.w,
+                      color: Colors.white,
+                      borderRadius: 24.r,
+                      shadowBlurColor: Colors.grey,
+                      shadowSpreadRadius: 0.5.sp,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(title, style: titleTextStyle),
-                          const Spacer(),
-                          AppContainer(
-                            onTap: () => controller.dismiss(),
-                            marginHorizontal: 1.w,
-                            marginVertical: 1.h,
-                            child: Icon(
-                              Icons.clear,
-                              color: Colors.grey.shade300,
-                              size: 4.w,
-                            ),
+                          8.heightBox,
+                          Row(
+                            children: [
+                              Text(title, style: titleTextStyle),
+                              const Spacer(),
+                              AppContainer(
+                                onTap: () => controller.dismiss(),
+                                marginHorizontal: 1.w,
+                                marginVertical: 1.h,
+                                child: Icon(
+                                  Icons.clear,
+                                  color: Colors.grey.shade300,
+                                  size: 4.w,
+                                ),
+                              ),
+                            ],
                           ),
+                          if (message != null) 4.heightBox,
+                          if (message != null) Divider(color: Colors.grey.shade100, thickness: 1.sp),
+                          if (message != null) 4.heightBox,
+                          if (message != null)
+                            Text(
+                              message,
+                              style: messageTextStyle,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          4.heightBox,
                         ],
                       ),
-                      if (message != null) Divider(color: Colors.grey.shade100, thickness: 1.sp),
-                      if (message != null)
-                        Text(
-                          message,
-                          style: messageTextStyle,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      2.heightBox,
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         );

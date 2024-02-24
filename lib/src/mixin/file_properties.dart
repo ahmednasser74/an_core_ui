@@ -34,7 +34,7 @@ mixin FileProperties {
     try {
       final isPermissionGranted = await AppPermissionService.isPickImagePermissionGranted(isForCamera: source == ImageSource.camera);
 
-      if (!isPermissionGranted) throw Exception('pleaseAllowCameraPermission'.translate);
+      if (!isPermissionGranted && !Platform.isIOS) throw Exception('pleaseAllowCameraPermission'.translate);
 
       final pickedFile = await ImagePicker().pickImage(source: source, imageQuality: imageQuality ?? 50);
       if (pickedFile == null) return null;
