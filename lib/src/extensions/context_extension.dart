@@ -28,9 +28,13 @@ extension NavExtension on BuildContext {
     Navigator.pushReplacementNamed(this, routeName, arguments: arguments);
   }
 
+  Future<dynamic> pushNamedAndRemoveUntil(String routeName) async {
+    Navigator.pushNamedAndRemoveUntil(this, routeName, (route) => false);
+  }
+
   void pop([result]) async => Navigator.of(this).pop(result);
 
-  void removeUntil(String routeName) {
+  void popUntil(String routeName) {
     Navigator.of(this).popUntil(ModalRoute.withName(routeName));
   }
 }
