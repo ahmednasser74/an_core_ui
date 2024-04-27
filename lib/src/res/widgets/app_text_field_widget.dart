@@ -1,3 +1,4 @@
+import 'package:an_core_ui/an_core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,6 +29,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final EdgeInsets? padding;
   final Color? fillColor;
   final double? labelFontSize;
+  final TextDirection? textDirection;
 
   const AppTextFieldWidget({
     Key? key,
@@ -57,7 +59,24 @@ class AppTextFieldWidget extends StatefulWidget {
     this.fillColor,
     this.secureIconColor,
     this.labelFontSize,
+    this.textDirection,
   }) : super(key: key);
+
+  factory AppTextFieldWidget.email({
+    Key? key,
+    TextEditingController? controller,
+    String? hint,
+    String? labelText,
+    EdgeInsets? padding,
+    Color? fillColor,
+    double? labelFontSize,
+    AutovalidateMode? autovalidateMode,
+    void Function(String? v)? onChanged,
+    String? Function(String? v)? validator,
+    VoidCallback? onTap,
+    FocusNode? focusNode,
+    TextDirection? textDirection,
+  }) = _AppEmailTextField;
 
   @override
   State<AppTextFieldWidget> createState() => _AppTextFieldWidgetState();
@@ -146,4 +165,44 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
     }
     super.dispose();
   }
+}
+
+class _AppEmailTextField extends AppTextFieldWidget {
+  _AppEmailTextField(
+      {Key? key,
+      TextEditingController? controller,
+      String? hint,
+      String? labelText,
+      bool readOnly = false,
+      bool dispose = true,
+      bool autoFocus = false,
+      bool filled = false,
+      EdgeInsets? padding,
+      Color? fillColor,
+      double? labelFontSize,
+      AutovalidateMode? autovalidateMode,
+      void Function(String? v)? onChanged,
+      String? Function(String? v)? validator,
+      VoidCallback? onTap,
+      FocusNode? focusNode,
+      TextDirection? textDirection})
+      : super(
+          key: key,
+          controller: controller,
+          inputType: TextInputType.emailAddress,
+          validator: (v) => v!.emailValidator(),
+          hint: labelText == null ? hint ??= 'email'.translate : null,
+          labelText: labelText,
+          readOnly: readOnly,
+          dispose: dispose,
+          autoFocus: autoFocus,
+          filled: filled,
+          padding: padding,
+          fillColor: fillColor,
+          labelFontSize: labelFontSize,
+          autovalidateMode: autovalidateMode,
+          onChanged: onChanged,
+          onTap: onTap,
+          focusNode: focusNode,
+        );
 }

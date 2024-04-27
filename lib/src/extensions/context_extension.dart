@@ -16,6 +16,10 @@ extension NavExtension on BuildContext {
     Navigator.pushReplacementNamed(this, routeName, arguments: arguments);
   }
 
+  void popUntilNamed(String routeName) {
+    Navigator.of(this).popUntil(ModalRoute.withName(routeName));
+  }
+
   Future<dynamic> pushRoute(Route route) async {
     Navigator.of(this).push(route);
   }
