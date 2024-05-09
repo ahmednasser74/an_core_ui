@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 /// Map picker is controlled with MapPickerController. Map pin is lifted up
 /// whenever mapMoving() is called, and will be down when mapFinishedMoving()
 /// is called.
-class MapPickerController {
+class AppMapPickerController {
   Function? mapMoving;
   Function? mapFinishedMoving;
 }
 
 /// MapPicker widget is main widget that gets map as a child.
 /// It does not restrict user from using maps other than google map.
-/// [MapPicker] is controlled with [MapPickerController] class object
-class MapPicker extends StatefulWidget {
+/// [AppMapPicker] is controlled with [AppMapPickerController] class object
+class AppMapPicker extends StatefulWidget {
   /// Map widget, Google, Yandex Map or any other map can be used, see example
   final Widget child;
 
@@ -22,12 +22,12 @@ class MapPicker extends StatefulWidget {
   /// default value is true, defines, if there is a dot, at the bottom of the pin
   final bool showDot;
 
-  /// [MapPicker] can be controller with [MapPickerController] object.
+  /// [AppMapPicker] can be controller with [AppMapPickerController] object.
   /// you can call mapPickerController.mapMoving!() and
   /// mapPickerController.mapFinishedMoving!() for controlling the Map Pin.
-  final MapPickerController mapPickerController;
+  final AppMapPickerController mapPickerController;
 
-  const MapPicker({
+  const AppMapPicker({
     Key? key,
     required this.child,
     required this.mapPickerController,
@@ -36,10 +36,10 @@ class MapPicker extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MapPickerState createState() => _MapPickerState();
+  _AppMapPickerState createState() => _AppMapPickerState();
 }
 
-class _MapPickerState extends State<MapPicker> with SingleTickerProviderStateMixin {
+class _AppMapPickerState extends State<AppMapPicker> with SingleTickerProviderStateMixin {
   static const double _dotRadius = 2.2;
 
   late AnimationController animationController;

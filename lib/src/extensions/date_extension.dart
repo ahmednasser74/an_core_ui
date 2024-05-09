@@ -6,7 +6,7 @@ import '../enum/index.dart';
 extension OnDateTime on DateTime {
   String _iniTime({required String format, Language? language}) {
     initializeDateFormatting();
-    return DateFormat(format, language?.value).format(this);
+    return DateFormat(format, language == null ? null : language!.value).format(this);
   }
 
   String time12Only({Language? language}) => _iniTime(format: 'hh:mm a', language: language);

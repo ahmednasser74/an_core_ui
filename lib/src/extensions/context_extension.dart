@@ -32,8 +32,8 @@ extension NavExtension on BuildContext {
     Navigator.pushReplacementNamed(this, routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName) async {
-    Navigator.pushNamedAndRemoveUntil(this, routeName, (route) => false);
+  Future<dynamic> pushNamedAndRemoveUntil(String routeName, {Object? arguments}) async {
+    Navigator.pushNamedAndRemoveUntil(this, routeName, (route) => false, arguments: arguments);
   }
 
   void pop([result]) async => Navigator.of(this).pop(result);
@@ -63,4 +63,8 @@ extension LanguageContextExtension on BuildContext {
     }
     setLocale(Locale(Language.en.value));
   }
+}
+
+extension UIContextExtension on BuildContext {
+  Color get primaryColor => Theme.of(this).primaryColor;
 }

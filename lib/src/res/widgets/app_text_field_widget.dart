@@ -30,6 +30,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final Color? fillColor;
   final double? labelFontSize;
   final TextDirection? textDirection;
+  final TextInputAction? textInputAction;
 
   const AppTextFieldWidget({
     Key? key,
@@ -60,6 +61,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.secureIconColor,
     this.labelFontSize,
     this.textDirection,
+    this.textInputAction,
   }) : super(key: key);
 
   factory AppTextFieldWidget.email({
@@ -76,6 +78,7 @@ class AppTextFieldWidget extends StatefulWidget {
     VoidCallback? onTap,
     FocusNode? focusNode,
     TextDirection? textDirection,
+    bool? dispose,
   }) = _AppEmailTextField;
 
   @override
@@ -114,7 +117,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
               // readOnly: widget.readOnly,
               onChanged: widget.onChanged,
               autofocus: widget.autoFocus,
-              textInputAction: TextInputAction.next,
+              textInputAction: widget.textInputAction ?? TextInputAction.next,
               maxLines: widget.maxLines,
               autovalidateMode: widget.autovalidateMode,
               inputFormatters: [
@@ -168,33 +171,34 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
 }
 
 class _AppEmailTextField extends AppTextFieldWidget {
-  _AppEmailTextField(
-      {Key? key,
-      TextEditingController? controller,
-      String? hint,
-      String? labelText,
-      bool readOnly = false,
-      bool dispose = true,
-      bool autoFocus = false,
-      bool filled = false,
-      EdgeInsets? padding,
-      Color? fillColor,
-      double? labelFontSize,
-      AutovalidateMode? autovalidateMode,
-      void Function(String? v)? onChanged,
-      String? Function(String? v)? validator,
-      VoidCallback? onTap,
-      FocusNode? focusNode,
-      TextDirection? textDirection})
-      : super(
+  _AppEmailTextField({
+    Key? key,
+    TextEditingController? controller,
+    String? hint,
+    String? labelText,
+    bool readOnly = false,
+    bool? dispose = true,
+    bool autoFocus = false,
+    bool filled = false,
+    EdgeInsets? padding,
+    Color? fillColor,
+    double? labelFontSize,
+    AutovalidateMode? autovalidateMode,
+    void Function(String? v)? onChanged,
+    String? Function(String? v)? validator,
+    VoidCallback? onTap,
+    FocusNode? focusNode,
+    TextDirection? textDirection,
+    TextInputAction? textInputAction,
+  }) : super(
           key: key,
           controller: controller,
           inputType: TextInputType.emailAddress,
-          validator: (v) => v!.emailValidator(),
+          validator: validator ?? (v) => v!.emailValidator(),
           hint: labelText == null ? hint ??= 'email'.translate : null,
           labelText: labelText,
           readOnly: readOnly,
-          dispose: dispose,
+          dispose: dispose ?? true,
           autoFocus: autoFocus,
           filled: filled,
           padding: padding,
@@ -204,5 +208,6 @@ class _AppEmailTextField extends AppTextFieldWidget {
           onChanged: onChanged,
           onTap: onTap,
           focusNode: focusNode,
+          textInputAction: textInputAction,
         );
 }

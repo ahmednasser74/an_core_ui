@@ -56,6 +56,15 @@ extension StringValidationExtension on String {
     return null;
   }
 
+  String? notLessOrBiggerThan({required int minNumToValidate, required int maxNumToValidate}) {
+    if (isEmpty) {
+      return 'thisFieldIsRequired'.translate;
+    } else if (length < minNumToValidate || length > maxNumToValidate) {
+      return '${'atLeast'.translate} $minNumToValidate ${'character'.translate} ${'and'.translate} ${'atMost'.translate} $maxNumToValidate ${'character'.translate}';
+    }
+    return null;
+  }
+
   String? onlyAcceptSpecificLength({required int length}) {
     if (isEmpty) {
       return 'thisFieldIsRequired'.translate;

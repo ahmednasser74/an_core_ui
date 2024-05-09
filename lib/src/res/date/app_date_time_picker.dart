@@ -50,6 +50,36 @@ class AppDateTimePicker {
     }
   }
 
+  ///---------------------------------    ----------------------------------------
+  static Future<void> timePicker(BuildContext context, ValueChanged<DateTime?> onChange) async {
+    if (Platform.isAndroid) {
+      final date = await _androidTimePicker(context);
+      onChange(date);
+    } else {
+      await iosPicker(context, CupertinoDatePickerMode.time, (date) => onChange(date));
+    }
+  }
+
+  static Future<DateTime?> _androidTimePicker(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (context, Widget? child) {
+        return Directionality(
+          textDirection: TextDirection.ltr,
+          child: child!,
+        );
+      },
+    );
+    if (pickedTime != null) {
+      final now = DateTime.now();
+      final dateTime = DateTime(now.year, now.month, now.day, pickedTime.hour, pickedTime.minute);
+      return dateTime;
+    } else {
+      return null;
+    }
+  }
+
   static Future<void> iosPicker(
     BuildContext context,
     CupertinoDatePickerMode mode,
@@ -117,36 +147,6 @@ class AppDateTimePicker {
         );
       },
     );
-  }
-
-  ///---------------------------------    ----------------------------------------
-  static Future<void> timePicker(BuildContext context, ValueChanged<DateTime?> onChange) async {
-    if (Platform.isAndroid) {
-      final date = await _androidTimePicker(context);
-      onChange(date);
-    } else {
-      await iosPicker(context, CupertinoDatePickerMode.time, (date) => onChange(date));
-    }
-  }
-
-  static Future<DateTime?> _androidTimePicker(BuildContext context) async {
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-      builder: (context, Widget? child) {
-        return Directionality(
-          textDirection: TextDirection.ltr,
-          child: child!,
-        );
-      },
-    );
-    if (pickedTime != null) {
-      final now = DateTime.now();
-      final dateTime = DateTime(now.year, now.month, now.day, pickedTime.hour, pickedTime.minute);
-      return dateTime;
-    } else {
-      return null;
-    }
   }
 
   ///-------------------------------------------------------------------------
