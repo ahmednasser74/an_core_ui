@@ -23,4 +23,6 @@ extension DateStringExtension on String {
   String get toMonthAndDay => DateTime.tryParse(this)?.toMonthAndDay() ?? '';
 
   String get toYearMonthDay => DateTime.tryParse(this)?.toBirthDateForm() ?? '';
+
+  String get toNameOfDayMonthYearTime => DateTime.tryParse(this)?.toNameOfDayMonthYearTime() ?? '';
 }

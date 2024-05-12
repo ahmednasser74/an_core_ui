@@ -9,7 +9,7 @@ extension NavExtension on BuildContext {
   }
 
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) async {
-    Navigator.pushNamed(this, routeName, arguments: arguments);
+    return await Navigator.pushNamed(this, routeName, arguments: arguments);
   }
 
   Future<dynamic> pushNamedReplacement(String routeName, {Object? arguments}) async {
@@ -53,6 +53,8 @@ extension LanguageContextExtension on BuildContext {
   bool get languageIsAr => locale.toString() == Language.ar.value;
 
   bool get languageIsEn => locale.toString() == Language.en.value;
+
+  bool get languageIsFr => locale.toString() == Language.fr.value;
 
   TextDirection get textDirection => languageIsAr ? TextDirection.rtl : TextDirection.ltr;
 

@@ -30,6 +30,8 @@ extension OnDateTime on DateTime {
   String toNameOfDayAndMonth({Language? language}) => _iniTime(format: 'EEEE, MMM dd', language: language);
 
   String toNameOfMonthAndTime({Language? language}) => _iniTime(format: 'MMM dd hh:mm a', language: language);
+  // E d MMM yyyy hh:mm aaa
+  String toNameOfDayMonthYearTime({Language? language}) => _iniTime(format: 'E d MMM yyyy hh:mm aaa', language: language);
 
   int get toTimeStamp => millisecondsSinceEpoch;
 
