@@ -133,7 +133,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
                 enabledBorder: inputDecorationTheme.enabledBorder,
                 errorBorder: inputDecorationTheme.errorBorder,
                 disabledBorder: inputDecorationTheme.disabledBorder,
-                filled: widget.filled == null ? inputDecorationTheme.filled : widget.filled,
+                filled: widget.filled ?? inputDecorationTheme.filled,
                 fillColor: widget.fillColor ?? inputDecorationTheme.fillColor,
                 contentPadding: inputDecorationTheme.contentPadding,
                 errorMaxLines: 2,

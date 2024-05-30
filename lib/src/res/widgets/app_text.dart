@@ -70,7 +70,7 @@ class AppText extends StatelessWidget {
             wordSpacing: wordSpacing,
             fontFamily: family,
             fontStyle: fontStyle,
-            overflow: overflow,
+            // overflow: overflow,
             letterSpacing: letterSpacing,
             textBaseline: textBaseline,
           ),

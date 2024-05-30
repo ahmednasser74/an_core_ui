@@ -31,7 +31,7 @@ extension PasswordValidatorExtension on String {
     } else if (length < 8) {
       return 'atLeast8Characters'.translate;
     } else if (password.trim() != trim()) {
-      return 'passwordConfirmationNotMatchedWithPassword'.translate;
+      return 'passwordNotMatched'.translate;
     }
     return null;
   }

@@ -20,7 +20,7 @@ class ToastHelper {
       context: context,
       persistent: true,
       transitionDuration: const Duration(milliseconds: 400),
-      duration: const Duration(seconds: 4),
+      duration: const Duration(milliseconds: 1500),
       builder: (context, controller) {
         return Flash(
           position: FlashPosition.bottom,
@@ -99,7 +99,7 @@ class ToastHelper {
     Toast toastLength = Toast.LENGTH_SHORT,
     Color? backgroundColor,
     Color textColor = Colors.white,
-    double fontSize = 16,
+    double fontSize = 12,
   }) {
     Fluttertoast.showToast(
       msg: msg,
