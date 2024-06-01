@@ -26,10 +26,11 @@ mixin FileProperties {
     }
   }
 
-  Future<({String path, File file})?> pickedImage({
+  Future<({String path, File? file})?> pickedImage({
     required ImageSource source,
     int? imageQuality,
-    bool convertToFile = true,
+    bool convertToFile = false,
+    int? maxMegaSize,
   }) async {
     try {
       final isPermissionGranted = await AppPermissionService.isPickImagePermissionGranted(isForCamera: source == ImageSource.camera);
@@ -41,7 +42,18 @@ mixin FileProperties {
 
       final path = pickedFile.path;
 
-      File imageAsFile = await convertImageToFile(path);
+      //* convert image to file
+      File? imageAsFile;
+      if (convertToFile) imageAsFile = await convertImageToFile(path);
+
+      //* compress image if it's size is bigger than maxMegaSize
+      if (maxMegaSize != null) {
+        final isFileSizeLowerThan = await this.isFileSizeLowerThan(filepath: path, maxMegaSize: maxMegaSize);
+        if (!isFileSizeLowerThan) {
+          final compressedFiles = await compressFile(file: imageAsFile ?? File(pickedFile.path));
+          return (path: compressedFiles.path, file: compressedFiles);
+        }
+      }
 
       return (path: path, file: imageAsFile);
     } catch (e) {
@@ -73,7 +85,7 @@ mixin FileProperties {
   }
 
   Future<bool> isFileSizeLowerThan({required String filepath, required int maxMegaSize}) async {
-    const int megaSize = 1048576;
+    const int megaSize = 1048576; //* one mega byte
     var file = File(filepath);
     int bytes = await file.length();
     if (bytes < maxMegaSize * megaSize) {
@@ -84,14 +96,18 @@ mixin FileProperties {
   }
 
   Future<File> compressFile({required File file}) async {
-    final Directory tempDir = await getTemporaryDirectory();
-    final String path = tempDir.path;
-    final int rand = math.Random().nextInt(100);
-    final im.Image image = im.decodeImage(file.readAsBytesSync())!;
-    //final im.Image smallerImage = im.copyResize(image, height: 100); // choose the size here, it will maintain aspect ratio
+    try {
+      final Directory tempDir = await getTemporaryDirectory();
+      final String path = tempDir.path;
+      final int rand = math.Random().nextInt(100);
+      final im.Image image = im.decodeImage(file.readAsBytesSync())!;
+      //final im.Image smallerImage = im.copyResize(image, height: 100); // choose the size here, it will maintain aspect ratio
 
-    final File compressedImage = File('$path/img_$rand.jpg')..writeAsBytesSync(im.encodeJpg(image, quality: 10));
-    return compressedImage;
+      final File compressedImage = File('$path/img_$rand.jpg')..writeAsBytesSync(im.encodeJpg(image, quality: 10));
+      return compressedImage;
+    } catch (e) {
+      return file;
+    }
   }
 
   bool fileIsImage({required String fileName}) {

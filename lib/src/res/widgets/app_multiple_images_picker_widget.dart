@@ -59,7 +59,7 @@ class _AppMultipleImagePickerWidgetState extends State<AppMultipleImagePickerWid
             images.addAll(pickedImages);
             if (images.length > widget.maxImages) images.length = widget.maxImages;
             for (var i = 0; i < images.length; i++) {
-              final isFileSizeLowerThan3Mega = await isFileSizeLowerThan(filepath: images[i], maxMegaSize: 2);
+              final isFileSizeLowerThan3Mega = await isFileSizeLowerThan(filepath: images[i], maxMegaSize: 1);
               if (!isFileSizeLowerThan3Mega) {
                 final compressedFiles = await compressFile(file: File(images[i]));
                 images[i] = compressedFiles.path;
