@@ -6,7 +6,8 @@ import '../enum/index.dart';
 extension OnDateTime on DateTime {
   String _iniTime({required String format, Language? language}) {
     initializeDateFormatting();
-    return DateFormat(format, language?.value).format(this);
+    String locale = _validateLocale(language?.value);
+    return DateFormat(format, locale).format(this);
   }
 
   String time12Only({Language? language}) => _iniTime(format: 'hh:mm a', language: language);
@@ -60,4 +61,13 @@ extension OnDateTime on DateTime {
   //   }
   //   return messages.justNow;
   // }
+}
+
+List<String> _supportedLocales = [...Language.values.map((e) => e.value)];
+
+String _validateLocale(String? locale) {
+  if (locale != null && _supportedLocales.contains(locale)) {
+    return locale;
+  }
+  return Language.en.value;
 }
