@@ -18,6 +18,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final bool dispose;
   final bool acceptArabicCharOnly;
   final bool acceptNumbersOnly;
+  final bool acceptSpaces;
   final VoidCallback? onTap;
   final int? maxLines;
   final Color? fontColor;
@@ -31,6 +32,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final double? labelFontSize;
   final TextDirection? textDirection;
   final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextFieldWidget({
     Key? key,
@@ -42,6 +44,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.readOnly = false,
     this.acceptArabicCharOnly = false,
     this.acceptNumbersOnly = false,
+    this.acceptSpaces = true,
     this.dispose = true,
     this.suffixIcon,
     this.validator,
@@ -62,6 +65,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.labelFontSize,
     this.textDirection,
     this.textInputAction,
+    this.inputFormatters,
   }) : super(key: key);
 
   factory AppTextFieldWidget.email({
@@ -121,8 +125,10 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
               maxLines: widget.maxLines,
               autovalidateMode: widget.autovalidateMode,
               inputFormatters: [
+                ...widget.inputFormatters ?? [],
                 if (widget.acceptArabicCharOnly) FilteringTextInputFormatter.allow(RegExp('^[\u0621-\u064A\u0660-\u0669 ]+\$')),
                 if (widget.acceptNumbersOnly) FilteringTextInputFormatter.digitsOnly,
+                if (!widget.acceptSpaces) FilteringTextInputFormatter.deny(RegExp(r'\s')),
               ],
               decoration: InputDecoration(
                 labelText: widget.labelText,
