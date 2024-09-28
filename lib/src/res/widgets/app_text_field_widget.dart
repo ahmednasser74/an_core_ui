@@ -117,6 +117,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
               focusNode: widget.focusNode,
               controller: widget.controller,
               validator: widget.validator,
+              textDirection: widget.textDirection,
               keyboardType: widget.inputType,
               // readOnly: widget.readOnly,
               onChanged: widget.onChanged,
@@ -215,5 +216,6 @@ class _AppEmailTextField extends AppTextFieldWidget {
           onTap: onTap,
           focusNode: focusNode,
           textInputAction: textInputAction,
+          textDirection: textDirection ?? TextDirection.ltr,
         );
 }
