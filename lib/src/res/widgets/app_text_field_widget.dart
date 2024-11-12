@@ -53,7 +53,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.onChanged,
     this.onTap,
     this.maxLines = 1,
-    this.fontColor = Colors.black,
+    this.fontColor,
     this.fontSize,
     this.height,
     this.focusNode,
@@ -101,6 +101,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     final InputDecorationTheme inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final themeBrightness = Theme.of(context).brightness;
     return StatefulBuilder(builder: (context, setState) {
       return GestureDetector(
         onTap: widget.onTap,
@@ -111,7 +112,11 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
           child: IgnorePointer(
             ignoring: widget.readOnly,
             child: TextFormField(
-              style: TextStyle(color: widget.fontColor, fontSize: widget.fontSize, height: 1.4),
+              style: TextStyle(
+                color: widget.fontColor ?? (themeBrightness == Brightness.light ? Colors.black : Colors.white),
+                fontSize: inputDecorationTheme.hintStyle?.fontSize ?? widget.fontSize,
+                height: 1.4,
+              ),
               obscureText: passwordVisibility,
               // onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
               focusNode: widget.focusNode,

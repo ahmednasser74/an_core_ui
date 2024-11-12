@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../index.dart';
+
 // ignore: must_be_immutable
 class AppCheckboxWithTextWidget extends StatefulWidget {
   AppCheckboxWithTextWidget({
@@ -61,7 +63,7 @@ class _AppCheckboxWithTextWidgetState extends State<AppCheckboxWithTextWidget> {
           Expanded(
             child: InkWell(
               onTap: widget.onTapText,
-              child: Text(widget.title ?? ''),
+              child: AppText(widget.title ?? ''),
             ),
           ),
       ],

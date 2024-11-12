@@ -69,4 +69,7 @@ extension LanguageContextExtension on BuildContext {
 
 extension UIContextExtension on BuildContext {
   Color get primaryColor => Theme.of(this).primaryColor;
+  Color get seconderColor => Theme.of(this).colorScheme.secondary;
+  Brightness get brightness => Theme.of(this).brightness;
+  bool get isDarkTheme => brightness == Brightness.dark;
 }

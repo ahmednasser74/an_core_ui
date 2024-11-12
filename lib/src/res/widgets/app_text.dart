@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+part 'app_text_sizes.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -45,9 +44,146 @@ class AppText extends StatelessWidget {
     this.decorationStyle,
     this.decorationColor,
   }) : super(key: key);
+  factory AppText.small(
+    String text, {
+    Key? key,
+    Color? color,
+    String? family,
+    double? size,
+    FontWeight? weight,
+    TextAlign? align,
+    TextDecoration? decoration,
+    Color? backgroundColor,
+    double? height,
+    FontStyle? fontStyle,
+    int? maxLines,
+    TextOverflow? overflow,
+    bool? softWrap,
+    double? letterSpacing,
+    TextBaseline? textBaseline,
+    void Function()? onTap,
+    EdgeInsetsGeometry? padding,
+    TextDecorationStyle? decorationStyle,
+    Color? decorationColor,
+  }) {
+    return _SmallAppText(
+      text,
+      key: key,
+      color: color,
+      family: family,
+      size: size,
+      weight: weight,
+      align: align,
+      decoration: decoration,
+      backgroundColor: backgroundColor,
+      height: height,
+      fontStyle: fontStyle,
+      maxLines: maxLines,
+      overflow: overflow,
+      softWrap: softWrap,
+      letterSpacing: letterSpacing,
+      textBaseline: textBaseline,
+      onTap: onTap,
+      padding: padding,
+      decorationStyle: decorationStyle,
+      decorationColor: decorationColor,
+    );
+  }
 
+  factory AppText.medium(
+    String text, {
+    Key? key,
+    Color? color,
+    String? family,
+    double? size,
+    FontWeight? weight,
+    TextAlign? align,
+    TextDecoration? decoration,
+    Color? backgroundColor,
+    double? height,
+    FontStyle? fontStyle,
+    int? maxLines,
+    TextOverflow? overflow,
+    bool? softWrap,
+    double? letterSpacing,
+    TextBaseline? textBaseline,
+    void Function()? onTap,
+    EdgeInsetsGeometry? padding,
+    TextDecorationStyle? decorationStyle,
+    Color? decorationColor,
+  }) {
+    return MediumAppText(
+      text,
+      key: key,
+      color: color,
+      family: family,
+      size: size,
+      weight: weight,
+      align: align,
+      decoration: decoration,
+      backgroundColor: backgroundColor,
+      height: height,
+      fontStyle: fontStyle,
+      maxLines: maxLines,
+      overflow: overflow,
+      softWrap: softWrap,
+      letterSpacing: letterSpacing,
+      textBaseline: textBaseline,
+      onTap: onTap,
+      padding: padding,
+      decorationStyle: decorationStyle,
+      decorationColor: decorationColor,
+    );
+  }
+
+  factory AppText.large(
+    String text, {
+    Key? key,
+    Color? color,
+    String? family,
+    double? size,
+    FontWeight? weight,
+    TextAlign? align,
+    TextDecoration? decoration,
+    Color? backgroundColor,
+    double? height,
+    FontStyle? fontStyle,
+    int? maxLines,
+    TextOverflow? overflow,
+    bool? softWrap,
+    double? letterSpacing,
+    TextBaseline? textBaseline,
+    void Function()? onTap,
+    EdgeInsetsGeometry? padding,
+    TextDecorationStyle? decorationStyle,
+    Color? decorationColor,
+  }) {
+    return LargeAppText(
+      text,
+      key: key,
+      color: color,
+      family: family,
+      size: size,
+      weight: weight,
+      align: align,
+      decoration: decoration,
+      backgroundColor: backgroundColor,
+      height: height,
+      fontStyle: fontStyle,
+      maxLines: maxLines,
+      overflow: overflow,
+      softWrap: softWrap,
+      letterSpacing: letterSpacing,
+      textBaseline: textBaseline,
+      onTap: onTap,
+      padding: padding,
+      decorationStyle: decorationStyle,
+      decorationColor: decorationColor,
+    );
+  }
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme.titleMedium;
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -59,20 +195,20 @@ class AppText extends StatelessWidget {
           overflow: overflow,
           softWrap: softWrap,
           style: TextStyle(
-            color: color,
-            fontSize: size,
-            fontWeight: weight,
-            decoration: decoration,
-            decorationStyle: decorationStyle,
-            decorationColor: decorationColor ?? color,
-            backgroundColor: backgroundColor,
-            height: height,
-            wordSpacing: wordSpacing,
-            fontFamily: family,
-            fontStyle: fontStyle,
+            color: color ?? textTheme?.color ?? color,
+            fontSize: size ?? textTheme?.fontSize,
+            fontWeight: weight ?? textTheme?.fontWeight,
+            decoration: decoration ?? textTheme?.decoration,
+            decorationStyle: decorationStyle ?? textTheme?.decorationStyle,
+            decorationColor: textTheme?.color ?? decorationColor ?? decorationColor,
+            backgroundColor: backgroundColor ?? textTheme?.backgroundColor,
+            height: height ?? textTheme?.height,
+            wordSpacing: wordSpacing ?? textTheme?.wordSpacing,
+            fontFamily: family ?? textTheme?.fontFamily,
+            fontStyle: fontStyle ?? textTheme?.fontStyle,
             // overflow: overflow,
-            letterSpacing: letterSpacing,
-            textBaseline: textBaseline,
+            letterSpacing: textTheme?.letterSpacing ?? letterSpacing,
+            textBaseline: textTheme?.textBaseline ?? textBaseline,
           ),
         ),
       ),
