@@ -62,6 +62,16 @@ mixin FileProperties {
     }
   }
 
+  Future<bool> isCameraPermissionGranted() async {
+    try {
+      final isPermissionGranted = await AppPermissionService.isPickImagePermissionGranted(isForCamera: true);
+      return isPermissionGranted;
+    } catch (e) {
+      ToastHelper.showToast(msg: 'pleaseAllowCameraPermission'.translate, backgroundColor: Colors.red, textColor: Colors.white);
+      return false;
+    }
+  }
+
   Future<List<String>?> pickedMultipleImages() async {
     final pickedFiles = await ImagePicker().pickMultiImage(imageQuality: 50);
     var imagesPath = pickedFiles?.map((image) => image.path).toList();
