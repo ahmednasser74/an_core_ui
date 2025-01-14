@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../index.dart';
 
-class AppSegmentSelection<T> extends StatefulWidget {
+class AppSegmentSelection<T extends Object> extends StatefulWidget {
   AppSegmentSelection({
     Key? key,
     this.label,
@@ -25,7 +25,7 @@ class AppSegmentSelection<T> extends StatefulWidget {
   State<AppSegmentSelection<T>> createState() => _AppSegmentSelectionState<T>();
 }
 
-class _AppSegmentSelectionState<T> extends State<AppSegmentSelection<T>> {
+class _AppSegmentSelectionState<T extends Object> extends State<AppSegmentSelection<T>> {
   @override
   Widget build(BuildContext context) {
     return Column(
