@@ -2,20 +2,19 @@ name: an_core_ui
 description: "A new Flutter package project."
 version: 0.0.1
 # homepage: null
-
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   an_core: 
-    # path: ../an_core
-    git:
-      url: https://github.com/ahmednasser74/an_core.git
-      ref: main
+    path: ../an_core
+    # git:
+    #   url: https://github.com/ahmednasser74/an_core.git
+    #   ref: main
   cached_network_image: ^3.3.1
-  easy_localization: ^3.0.4
-  file_picker: ^6.1.1
+  easy_localization: ^3.0.7
+  file_picker: ^8.1.7
   flash: ^3.1.0
   flutter:
     sdk: flutter
@@ -33,7 +32,7 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
-flutter: null
+# flutter: null
 
 # To add assets to your package, add an assets section, like this:
 # assets:
