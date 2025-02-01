@@ -33,6 +33,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final TextDirection? textDirection;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
+  final void Function(String)? onFieldSubmitted;
 
   const AppTextFieldWidget({
     Key? key,
@@ -66,6 +67,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.textDirection,
     this.textInputAction,
     this.inputFormatters,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   factory AppTextFieldWidget.email({
@@ -118,6 +120,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
                 height: 1.4,
               ),
               obscureText: passwordVisibility,
+              onFieldSubmitted: widget.onFieldSubmitted,
               // onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
               focusNode: widget.focusNode,
               controller: widget.controller,
