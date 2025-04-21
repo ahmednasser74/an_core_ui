@@ -87,6 +87,23 @@ class AppTextFieldWidget extends StatefulWidget {
     bool? dispose,
   }) = _AppEmailTextField;
 
+  factory AppTextFieldWidget.password({
+    Key? key,
+    TextEditingController? controller,
+    String? hint,
+    String? labelText,
+    EdgeInsets? padding,
+    Color? fillColor,
+    double? labelFontSize,
+    AutovalidateMode? autovalidateMode,
+    void Function(String? v)? onChanged,
+    String? Function(String? v)? validator,
+    VoidCallback? onTap,
+    FocusNode? focusNode,
+    TextDirection? textDirection,
+    bool? dispose,
+  }) = _AppPasswordTextField;
+
   @override
   State<AppTextFieldWidget> createState() => _AppTextFieldWidgetState();
 }
@@ -225,5 +242,39 @@ class _AppEmailTextField extends AppTextFieldWidget {
           focusNode: focusNode,
           textInputAction: textInputAction,
           textDirection: textDirection ?? TextDirection.ltr,
+        );
+}
+
+class _AppPasswordTextField extends AppTextFieldWidget {
+  _AppPasswordTextField({
+    Key? key,
+    TextEditingController? controller,
+    String? hint,
+    String? labelText,
+    bool readOnly = false,
+    bool? dispose = true,
+    bool autoFocus = false,
+    bool filled = false,
+    EdgeInsets? padding,
+    Color? fillColor,
+    double? labelFontSize,
+    AutovalidateMode? autovalidateMode,
+    void Function(String? v)? onChanged,
+    String? Function(String? v)? validator,
+    VoidCallback? onTap,
+    FocusNode? focusNode,
+    TextDirection? textDirection,
+    TextInputAction? textInputAction,
+  }) : super(
+          key: key,
+          controller: controller,
+          inputType: TextInputType.visiblePassword,
+          validator: validator,
+          hint: hint,
+          labelText: labelText,
+          readOnly: readOnly,
+          dispose: dispose ?? true,
+          autoFocus: autoFocus,
+          filled: filled,
         );
 }
