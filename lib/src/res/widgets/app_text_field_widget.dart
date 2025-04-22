@@ -8,6 +8,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final String? hint;
   final bool secureText;
   final Color? secureIconColor;
+  final double? secureIconSize;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String? v)? validator;
@@ -63,6 +64,7 @@ class AppTextFieldWidget extends StatefulWidget {
     this.filled,
     this.fillColor,
     this.secureIconColor,
+    this.secureIconSize,
     this.labelFontSize,
     this.textDirection,
     this.textInputAction,
@@ -101,6 +103,8 @@ class AppTextFieldWidget extends StatefulWidget {
     VoidCallback? onTap,
     FocusNode? focusNode,
     TextDirection? textDirection,
+    Color? secureIconColor,
+    double? secureIconSize,
     bool? dispose,
   }) = _AppPasswordTextField;
 
@@ -186,6 +190,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
         icon: Icon(
           passwordVisibility ? Icons.visibility_off_outlined : Icons.visibility_outlined,
           color: widget.secureIconColor ?? Theme.of(context).primaryColor,
+          size: widget.secureIconSize,
         ),
         onPressed: () => setState(() => passwordVisibility = !passwordVisibility),
       );
@@ -265,6 +270,8 @@ class _AppPasswordTextField extends AppTextFieldWidget {
     FocusNode? focusNode,
     TextDirection? textDirection,
     TextInputAction? textInputAction,
+    Color? secureIconColor,
+    double? secureIconSize,
   }) : super(
           key: key,
           controller: controller,
@@ -276,5 +283,8 @@ class _AppPasswordTextField extends AppTextFieldWidget {
           dispose: dispose ?? true,
           autoFocus: autoFocus,
           filled: filled,
+          secureText: true,
+          secureIconColor: secureIconColor,
+          secureIconSize: secureIconSize,
         );
 }
