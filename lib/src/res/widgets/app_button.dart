@@ -1,3 +1,4 @@
+import 'package:an_core_ui/src/res/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -62,16 +63,14 @@ class AppButton extends StatelessWidget {
           ),
         ),
         child: child ??
-            Text(
+            AppText(
               text ?? '',
-              style: TextStyle(
-                fontSize: fonSize ?? buttonTextStyle?.fontSize,
-                color: textColor ?? buttonTextStyle?.color ?? Colors.black,
-                fontFamily: fontFamily ?? buttonTextStyle?.fontFamily,
-                fontWeight: fontWeight ?? buttonTextStyle?.fontWeight,
-                height: 1.2,
-              ),
-              textAlign: textAlign,
+              size: fonSize ?? buttonTextStyle?.fontSize,
+              color: textColor ?? buttonTextStyle?.color ?? Colors.black,
+              family: fontFamily ?? buttonTextStyle?.fontFamily,
+              weight: fontWeight ?? buttonTextStyle?.fontWeight,
+              height: 1.2,
+              align: textAlign,
             ),
       ),
     );
