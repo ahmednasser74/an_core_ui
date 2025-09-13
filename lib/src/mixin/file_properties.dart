@@ -138,4 +138,21 @@ mixin FileProperties {
   String getFileNameFromImagePath(String imagePath) {
     return path.basename(imagePath);
   }
+
+  Future<String> getFilePath({required String fileName}) async {
+    Directory? targetDirectory;
+    if (Platform.isAndroid) {
+      targetDirectory = await getExternalStorageDirectory();
+    } else {
+      final docs = await getApplicationDocumentsDirectory();
+      final downloadsPath = '${docs.path}/Downloads';
+      final downloadsDir = Directory(downloadsPath);
+      if (!await downloadsDir.exists()) {
+        await downloadsDir.create(recursive: true);
+      }
+      targetDirectory = downloadsDir;
+    }
+
+    return '${targetDirectory?.path}/$fileName';
+  }
 }
