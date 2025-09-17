@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum AppContainerImgType { asset, network, file }
 
+enum AppContainerGradientType { linear, sweep }
+
 class AppContainer extends StatelessWidget {
   const AppContainer({
     Key? key,
@@ -25,6 +27,7 @@ class AppContainer extends StatelessWidget {
     this.image,
     this.imgType = AppContainerImgType.asset,
     this.fit,
+    this.gradientType = AppContainerGradientType.linear,
     this.gradientBegin,
     this.gradientEnd,
     this.gradientColors,
@@ -44,7 +47,9 @@ class AppContainer extends StatelessWidget {
     this.paddingBottom,
     this.paddingLeft,
     this.paddingRight,
-  }) : super(key: key);
+  }) :
+        // assert(image != null && imgType != null, 'image must be provided when imgType is not asset'),
+        super(key: key);
 
   final Widget? child;
   final Color? color, borderColor, shadowBlurColor;
@@ -57,6 +62,7 @@ class AppContainer extends StatelessWidget {
   final dynamic image;
   final BoxFit? fit;
   final AppContainerImgType? imgType;
+  final AppContainerGradientType? gradientType;
   final AlignmentGeometry? gradientBegin, gradientEnd;
   final List<Color>? gradientColors;
   final double? height, width;
@@ -163,11 +169,19 @@ class AppContainer extends StatelessWidget {
 
   Gradient? _gradient(BuildContext context) {
     if (gradientColors != null) {
-      return LinearGradient(
-        begin: gradientBegin ?? Alignment.topCenter,
-        end: gradientEnd ?? Alignment.bottomCenter,
-        colors: [...gradientColors!],
-      );
+      if (gradientType == AppContainerGradientType.linear) {
+        return LinearGradient(
+          begin: gradientBegin ?? Alignment.topCenter,
+          end: gradientEnd ?? Alignment.bottomCenter,
+          colors: [...gradientColors!],
+        );
+      }
+      if (gradientType == AppContainerGradientType.sweep) {
+        return SweepGradient(
+          colors: [...gradientColors!],
+        );
+      }
+      return null;
     }
     return null;
   }
