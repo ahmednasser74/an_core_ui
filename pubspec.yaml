@@ -3,32 +3,31 @@ description: "A new Flutter package project."
 version: 0.0.1
 # homepage: null
 environment:
-  sdk: '>=3.5.0 <4.0.0'
+  sdk: ">=3.5.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
-  an_core: 
+  an_core:
     # path: ../an_core
     git:
       url: https://github.com/ahmednasser74/an_core.git
       ref: main
   cached_network_image: ^3.3.1
   easy_localization: ^3.0.7
-  file_picker: ^8.1.7
+  file_picker: ^10.3.3
   flash: ^3.1.0
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   fluttertoast: ^8.2.4
   image: ^4.1.7
-  image_picker: ^1.0.7
+  image_picker: ^1.2.0
   path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
