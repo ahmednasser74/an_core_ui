@@ -6,6 +6,10 @@ extension StringExtension on String {
 
   String get firstChar => isNotEmpty ? trim().split(' ').map((l) => l[0]).take(2).join() : '';
 
+  String get capitalizeFirstChar => isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
+
+  bool get isUrl => startsWith('http://') || startsWith('https://');
+
   String get translate => this.tr();
 }
 
@@ -29,4 +33,6 @@ extension DateStringExtension on String {
 
 extension NullableStringExtension on String? {
   bool get isNullOrEmpty => this == null || this!.isEmpty;
+
+  bool get isNotNull => this != null;
 }
