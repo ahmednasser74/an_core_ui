@@ -123,7 +123,7 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final InputDecorationTheme inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final InputDecorationThemeData inputDecorationTheme = Theme.of(context).inputDecorationTheme;
     final themeBrightness = Theme.of(context).brightness;
     return StatefulBuilder(builder: (context, setState) {
       return GestureDetector(

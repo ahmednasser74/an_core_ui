@@ -26,3 +26,7 @@ extension DateStringExtension on String {
 
   String get toNameOfDayMonthYearTime => DateTime.tryParse(this)?.toNameOfDayMonthYearTime() ?? '';
 }
+
+extension NullableStringExtension on String? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}
