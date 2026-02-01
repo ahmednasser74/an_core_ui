@@ -21,3 +21,24 @@ extension DurationExtension on num {
   Duration get months => Duration(days: toInt() * 30);
   Duration get years => Duration(days: toInt() * 365);
 }
+
+extension IntArabicDigits on int {
+  String get toArNum {
+    const westernToArabic = {
+      '0': '٠',
+      '1': '١',
+      '2': '٢',
+      '3': '٣',
+      '4': '٤',
+      '5': '٥',
+      '6': '٦',
+      '7': '٧',
+      '8': '٨',
+      '9': '٩',
+    };
+
+    return toString().split('').map((char) {
+      return westernToArabic[char] ?? char;
+    }).join();
+  }
+}
